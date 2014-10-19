@@ -1,20 +1,40 @@
 section .data
-    msg db `Result: %d\n`  ; backticks for \n
+    inp         dq 0
+    msg         db "fib(%d) = %d", 0x0a, 0
+    inputmsg    db "Enter a number: ", 0 
+    scanfin     db "%d"    
  
 section .text
     global main
     extern printf
+    extern scanf
 main:
     push    rbp
     mov     rbp, rsp
 
-    mov     rdi, 25
-    call    fib
-
-    lea     rdi, [msg]  ; moves adress of msg into rdi
+    ; print inputmsg
+    lea     rdi, [inputmsg]  ; moves adress of msg into rdi
     mov     rsi, rax
     xor     eax, eax    ; no floating point paramters
     call    printf
+
+    ; get input
+    lea     rdi, [scanfin]
+    lea     rsi, [inp]  ; second parameter for scanf: address to inp
+    xor     eax, eax
+    call    scanf
+
+    mov     rdi, [inp] 
+    call    fib
+
+    ; print result
+    lea     rdi, [msg]  ; moves adress of msg into rdi
+   ; mov     rsi, rax
+    mov     rsi, [inp]
+    mov     rdx, rax
+    xor     eax, eax    ; no floating point paramters
+    call    printf
+
     xor     eax, eax    ; return 0
     pop     rbp
     ret
