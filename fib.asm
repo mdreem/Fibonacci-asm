@@ -1,6 +1,6 @@
 section .data
     inp         dq 0
-    msg         db "fib(%d) = %d", 0x0a, 0
+    msg         db "fib(%d) = %ld", 0x0a, 0
     inputmsg    db "Enter a number: ", 0 
     scanfin     db "%d"    
  
@@ -24,12 +24,12 @@ main:
     xor     eax, eax
     call    scanf
 
+    ; call fib(inp)
     mov     rdi, [inp] 
     call    fib
 
     ; print result
     lea     rdi, [msg]  ; moves adress of msg into rdi
-   ; mov     rsi, rax
     mov     rsi, [inp]
     mov     rdx, rax
     xor     eax, eax    ; no floating point paramters
