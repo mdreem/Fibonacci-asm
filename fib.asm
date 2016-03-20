@@ -13,11 +13,10 @@ main:
     mov     rbp, rsp
 
     ; print inputmsg
-    lea     rdi, [inputmsg]  ; moves adress of msg into rdi
+    lea     rdi, [inputmsg]  ; moves address of msg into rdi
     mov     rsi, rax
     xor     eax, eax    ; no floating point paramters
     call    printf
-
     ; get input
     lea     rdi, [scanfin]
     lea     rsi, [inp]  ; second parameter for scanf: address to inp
@@ -29,7 +28,7 @@ main:
     call    fib
 
     ; print result
-    lea     rdi, [msg]  ; moves adress of msg into rdi
+    lea     rdi, [msg]  ; moves address of msg into rdi
     mov     rsi, [inp]
     mov     rdx, rax
     xor     eax, eax    ; no floating point paramters
